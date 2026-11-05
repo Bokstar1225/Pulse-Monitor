@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;">
+
+    <title>Pulse Monitor</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="renderer.js" defer></script>
+
+</head>
+
+<body>
+    <div class="window-titlebar"></div>
+
+    <div class="app-container">
+
+        <!-- APPLICATION HEADER -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    <span> P </span>
+                </div>
+
+                <div>
+                    <h1>Pulse Monitor</h1>
+                    <p>System Performance</p>
+                </div>
+
+            </div>
+
+            <div class="header-status">
+
+                <span class="status-indicator"></span>
+
+                <span id="system-status">CONNECTING</span>
+
+                <span class="version">v1.0.0</span>
+
+            </div>
+
+        </header>
+
+
+        <main>
+
+            <!-- PAGE INTRODUCTION -->
+
+            <section class="page-heading">
+
+                <div>
+
+                    <span class="eyebrow">SYSTEM MONITORING</span>
+
+                    <h2>Overview</h2>
+
+                    <p>
+                        Monitor your hardware and system performance
+                        in real time.
+                    </p>
+
+                </div>
+
+                <div class="heading-actions">
+                    <div class="refresh-label">
+                        <span class="refresh-dot"></span>
+                        <span id="refresh-timer">Live monitoring · 2 sec</span>
+                    </div>
+                    <button id="refresh-button" class="refresh-button" type="button">
+                        <span aria-hidden="true">↻</span>
+                        Refresh
+                    </button>
+                </div>
+
+            </section>
+
+
+            <!-- DASHBOARD -->
+
+            <section class="dashboard">
+
+
+                <!-- CPU CARD -->
+
+                <article class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-identity">
+
+                            <div class="card-icon cpu-icon">
+                                CPU
+                            </div>
+
+                            <div>
+                                <h3>Processor</h3>
+                                <span>PROCESSOR LOAD</span>
+                            </div>
+
+                        </div>
+
+                        <span class="card-tag">HARDWARE</span>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span id="cpu-usage">--%</span>
+
+                    </div>
+
+                    <p class="metric-label">Current utilisation</p>
+
+
+                    <div class="progress-track">
+
+                        <div id="cpu-bar" class="progress-fill cpu-fill"></div>
+
+                    </div>
+
+
+                    <div class="card-details">
+
+                        <p id="cpu-name">Detecting processor...</p>
+
+                        <p id="cpu-cores">Detecting cores...</p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MEMORY CARD -->
+
+                <article class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-identity">
+
+                            <div class="card-icon memory-icon">
+                                RAM
+                            </div>
+
+                            <div>
+                                <h3>Memory</h3>
+                                <span>SYSTEM MEMORY</span>
+                            </div>
+
+                        </div>
+
+                        <span class="card-tag">HARDWARE</span>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span id="memory-usage">--%</span>
+
+                    </div>
+
+                    <p class="metric-label">Memory utilisation</p>
+
+
+                    <div class="progress-track">
+
+                        <div id="memory-bar"
+                            class="progress-fill memory-fill"></div>
+
+                    </div>
+
+
+                    <div class="card-details">
+
+                        <p id="memory-details">Calculating memory...</p>
+
+                        <p id="memory-available">Checking available memory...</p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BATTERY CARD -->
+
+                <article class="card wide-card">
+
+                    <div class="card-header">
+
+                        <div class="card-identity">
+
+                            <div class="card-icon battery-icon">
+                                BAT
+                            </div>
+
+                            <div>
+                                <h3>Battery</h3>
+                                <span>POWER MANAGEMENT</span>
+                            </div>
+
+                        </div>
+
+                        <span class="card-tag">POWER</span>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span id="battery-usage">--%</span>
+
+                    </div>
+
+                    <p class="metric-label">Battery level</p>
+
+
+                    <div class="progress-track">
+
+                        <div id="battery-bar"
+                            class="progress-fill battery-fill"></div>
+
+                    </div>
+
+
+                    <div class="card-details">
+
+                        <p id="battery-status">Checking battery...</p>
+
+                        <p id="battery-details">
+                            Retrieving power information...
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- SYSTEM CARD -->
+
+                <article class="card wide-card">
+
+                    <div class="card-header">
+
+                        <div class="card-identity">
+
+                            <div class="card-icon system-icon">
+                                SYS
+                            </div>
+
+                            <div>
+                                <h3>System</h3>
+                                <span>DEVICE INFORMATION</span>
+                            </div>
+
+                        </div>
+
+                        <span class="card-tag">DEVICE</span>
+
+                    </div>
+
+
+                    <div class="system-details">
+
+                        <div>
+                            <span>Device</span>
+                            <p id="device-model">Detecting device...</p>
+                        </div>
+
+                        <div>
+                            <span>Operating system</span>
+                            <p id="os-version">Detecting operating system...</p>
+                        </div>
+
+                        <div>
+                            <span>Architecture</span>
+                            <p id="system-architecture">
+                                Detecting architecture...
+                            </p>
+                        </div>
+
+                        <div>
+                            <span>System uptime</span>
+                            <p id="system-uptime">Calculating uptime...</p>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer>
+
+                <p id="last-updated">
+                    Waiting for system information...
+                </p>
+
+                <p>Pulse Monitor &copy; 2026</p>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
